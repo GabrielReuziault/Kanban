@@ -18,6 +18,5 @@ class ProjectService(
         id = projectDto.id ?: UUID.randomUUID(),
         name = projectDto.name,
         description = projectDto.description,
-        ///test
     )
 }
