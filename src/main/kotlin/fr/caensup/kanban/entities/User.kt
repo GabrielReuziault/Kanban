@@ -8,24 +8,24 @@ open class User(
     @Id
     open var id: UUID= UUID.randomUUID(),
 
-    @Column(length = 120, nullable = false)
-    open var login: String? = null,
+    @Column(length = 60, nullable = false, unique = true)
+    open var username: String? = null,
 
-    @Column(length = 120, nullable = false)
+    @Column(length = 255, nullable = false)
     open var password: String? = null,
 
-    @Column(length = 120, nullable = false)
+    @Column(length = 255, nullable = false, unique = true)
     open var email: String? = null,
 
-    @Column(length = 120, nullable = false)
+    @Column(length = 60)
     open var firstname: String? = null,
 
-    @Column(length = 120, nullable = false)
+    @Column(length = 60)
     open var lastname: String? = null,
 ){
 
-    @OneToMany(mappedBy = "owner", cascade = [CascadeType.ALL], orphanRemoval = true)
-    open var ownedProjects: MutableList<Project> = mutableListOf()
+    @OneToMany(mappedBy = "creator", cascade = [CascadeType.ALL], orphanRemoval = true)
+    open var myProjects: MutableList<Project> = mutableListOf()
 
     @ManyToMany
     @JoinTable(
@@ -33,5 +33,5 @@ open class User(
         joinColumns = [JoinColumn(name = "user_id")],
         inverseJoinColumns = [JoinColumn(name = "project_id")]
     )
-    open var sharedProjects: MutableList<Project> = mutableListOf()
+    open var projects: MutableList<Project> = mutableListOf()
 }

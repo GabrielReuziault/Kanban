@@ -18,7 +18,7 @@ class UserService
     fun delete(id: UUID) = userRepository.deleteById(id)
     fun dtoToUser(userDto: UserDto) = User(
         id = userDto.id ?: UUID.randomUUID(),
-        login = userDto.login,
+        username = userDto.username,
         password = userDto.password,
         email = userDto.email,
         firstname = userDto.firstName,

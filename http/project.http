@@ -8,7 +8,8 @@ POST http://localhost:8080/projects/
 Content-Type: application/json
 
 {
-  "name": "Project 1",
-  "description": "This is Project 1"
+  "name": "Project 4",
+  "description": "This is Project 4",
+  "creatorId": {{creatorId}}
 }
 ###

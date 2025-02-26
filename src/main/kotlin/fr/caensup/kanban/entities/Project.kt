@@ -12,15 +12,17 @@ open class Project(
     open var name: String? = null,
 
     @Column(length = 255)
-    open var description: String? = null
+    open var description: String? = null,
+
+    @ManyToOne(optional = false)
+    open var creator: User
 ){
     @Column(nullable = false)
     open var createdAt: Date = Date()
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id", nullable = false)
-    open var owner: User? = null
+    @ManyToMany(mappedBy = "projects")
+    open var members: MutableList<User> = mutableListOf()
 
-    @ManyToMany(mappedBy = "sharedProjects")
-    open var sharedWithUsers: MutableList<User> = mutableListOf()
+    @OneToMany(mappedBy = "project", cascade = [CascadeType.ALL], orphanRemoval = true)
+    open var boards: MutableList<Board> = mutableListOf()
 }

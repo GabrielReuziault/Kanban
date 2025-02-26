@@ -12,4 +12,7 @@ class ProjectController(private val projectService: ProjectService) {
 
     @PostMapping(path = ["/", ""])
     fun save(@RequestBody project: ProjectDto)= projectService.save(project)
+
+    @PostMapping(path = ["/{id}/members"])
+    fun addMembers(@RequestBody project: ProjectDto)= projectService.addMembers()
 }
