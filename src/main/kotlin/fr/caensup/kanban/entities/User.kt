@@ -1,8 +1,6 @@
 package fr.caensup.kanban.entities
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
+import jakarta.persistence.*
 import java.util.*
 
 @Entity
@@ -24,4 +22,16 @@ open class User(
 
     @Column(length = 120, nullable = false)
     open var lastname: String? = null,
-){}
+){
+
+    @OneToMany(mappedBy = "owner", cascade = [CascadeType.ALL], orphanRemoval = true)
+    open var ownedProjects: MutableList<Project> = mutableListOf()
+
+    @ManyToMany
+    @JoinTable(
+        name = "shared_projects",
+        joinColumns = [JoinColumn(name = "user_id")],
+        inverseJoinColumns = [JoinColumn(name = "project_id")]
+    )
+    open var sharedProjects: MutableList<Project> = mutableListOf()
+}
