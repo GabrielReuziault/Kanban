@@ -1,7 +1,13 @@
 package fr.caensup.kanban.entities
 
-import jakarta.persistence.*
-import java.util.*
+import jakarta.persistence.CascadeType
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import jakarta.persistence.ManyToMany
+import jakarta.persistence.ManyToOne
+import java.util.Date
+import java.util.UUID
 
 @Entity
 open class Project(
@@ -15,14 +21,12 @@ open class Project(
     open var description: String? = null,
 
     @ManyToOne(optional = false)
-    open var creator: User
-){
+    open var creator:User
+) {
+
     @Column(nullable = false)
-    open var createdAt: Date = Date()
+    open var createdAt:Date = Date()
 
-    @ManyToMany(mappedBy = "projects")
-    open var members: MutableList<User> = mutableListOf()
-
-    @OneToMany(mappedBy = "project", cascade = [CascadeType.ALL], orphanRemoval = true)
-    open var boards: MutableList<Board> = mutableListOf()
+    @ManyToMany
+    open var members:MutableList<User> = mutableListOf()
 }

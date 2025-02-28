@@ -1,12 +1,17 @@
 package fr.caensup.kanban.entities
 
-import jakarta.persistence.*
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import jakarta.persistence.ManyToMany
+import jakarta.persistence.OneToMany
+import jakarta.persistence.Table
 import java.util.*
 
 @Entity
 open class User(
     @Id
-    open var id: UUID= UUID.randomUUID(),
+    open var id: UUID = UUID.randomUUID(),
 
     @Column(length = 60, nullable = false, unique = true)
     open var username: String? = null,
@@ -21,17 +26,12 @@ open class User(
     open var firstname: String? = null,
 
     @Column(length = 60)
-    open var lastname: String? = null,
-){
+    open var lastname: String? = null
+) {
 
-    @OneToMany(mappedBy = "creator", cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(mappedBy = "creator")
     open var myProjects: MutableList<Project> = mutableListOf()
 
-    @ManyToMany
-    @JoinTable(
-        name = "shared_projects",
-        joinColumns = [JoinColumn(name = "user_id")],
-        inverseJoinColumns = [JoinColumn(name = "project_id")]
-    )
+    @ManyToMany(mappedBy = "members")
     open var projects: MutableList<Project> = mutableListOf()
 }
