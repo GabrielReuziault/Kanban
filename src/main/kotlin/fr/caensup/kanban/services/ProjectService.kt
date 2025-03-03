@@ -1,6 +1,7 @@
 package fr.caensup.kanban.services
 
 import fr.caensup.kanban.dtos.ProjectDto
+import fr.caensup.kanban.entities.Board
 import fr.caensup.kanban.entities.Project
 import fr.caensup.kanban.repositories.ProjectRepository
 import fr.caensup.kanban.repositories.UserRepository
@@ -26,6 +27,12 @@ class ProjectService(
     fun addMembers(id: UUID, members: List<UUID>): Project {
         val project = projectRepository.findById(id).get()
         project.members.addAll(userRepository.findAllById(members))
+        return projectRepository.save(project)
+    }
+
+    fun addBoard(id: UUID, boards: List<Board>): Project {
+        val project = projectRepository.findById(id).get()
+        project.boards.addAll(boards)
         return projectRepository.save(project)
     }
 }

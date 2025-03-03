@@ -36,3 +36,10 @@ Content-Type: application/json
 
 ["9d0b0e3b-914a-46a2-a4f8-3c10b1870c72","74e9a55f-7e2c-4d8f-a6d3-ad8a4f37d8cb"]
 ###
+
+### Add a board in an existing project
+PATCH http://localhost:8080/projects/3f038da6-f913-4b4b-96bb-47fc1e8ebd4a/boards
+Content-Type: application/json
+
+["9d0b0e3b-914a-46a2-a4f8-3c10b1870c72","74e9a55f-7e2c-4d8f-a6d3-ad8a4f37d8cb"]
+###

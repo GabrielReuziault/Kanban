@@ -1,6 +1,7 @@
 package fr.caensup.kanban.controllers
 
 import fr.caensup.kanban.dtos.ProjectDto
+import fr.caensup.kanban.entities.Board
 import fr.caensup.kanban.entities.Project
 import fr.caensup.kanban.services.ProjectService
 import org.springframework.web.bind.annotation.GetMapping
@@ -25,5 +26,8 @@ class ProjectController (
 
     @PatchMapping("/{id}/members")
     fun addMembers(@PathVariable id:UUID, @RequestBody members:List<UUID>) = projectService.addMembers(id,members)
+
+    @PatchMapping("/{id}/board")
+    fun addBoard(@PathVariable id:UUID, @RequestBody boards: List<Board>) = projectService.addBoard(id, boards)
 
 }
